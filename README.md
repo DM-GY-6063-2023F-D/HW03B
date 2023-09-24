@@ -1,60 +1,29 @@
-# p5.js Template
+# HW03B
 
-This is a README file that can be used to describe and document your assignment.
+This is a sketch that draws an irregular pattern of circles based on some of the patterns of Yayoi Kusama:
 
-Markdown Cheatsheet (from [https://www.markdownguide.org/cheat-sheet/](https://www.markdownguide.org/cheat-sheet/)):
+![](./imgs/kusama-03B.jpg)
 
----
----
+The first way I thought about implementing this involved creating a grid, and then for some of the grid spaces I would place a large circle, and for others I would create a sub-grid, where different pre-determined patterns could be drawn. Even though they would be pre-determined patterns, their x and y positions would be shifted using ```random()```, so it would still be irregular in the end.
 
-# Heading1
-## Heading2
-### Heading3
-#### Heading4
-##### Heading5
-###### Heading6
+This was my sketch for this idea:
 
-**bold text**
+![](./imgs/HW03B_00.jpg)
 
-*italicized text*
+But, this turned out to be a little more difficult to implement and I wasn't so sure that the results would be very different form something a little bit simpler, like this:
 
-~~strikethrough text~~
+![](./imgs/HW03B_01.jpg)
 
-Ordered List:
-1. First item
-2. Second item
-3. Third item
+Start with a regular grid, and in each position I can pick from one of 3 pre-determined circles diameters using the [random lottery logic](https://dm-gy-6063-2023f-d.github.io/tutorial/random-lottery/). In the same if/else blocks where I select the size of the circle I can also select the range of the variation for the x and y shifts. Smaller circles can have larger variation and bigger circles should have smaller variation to avoid overlapping with neighbors.
 
-Unordered List:
-- First item
-- Second item
-- Third item
-
-`short code block`
+In order to have larger variations I made the grid spacing a little bit bigger than the largest circle size. Initially I had:
 
 ```
-extended code block
-fun() {
-  return 0
-}
+let spacing = 1.5 * maxDiameter;
 ```
 
-Link:  
-[linked text](https://www.example.com)
+But after some tests I saw that ```1.2``` gave something with a little bit more circles and not too many overlaps:
 
-
-Image with url:  
-![image description](https://dm-gy-6063-2023f-d.github.io/assets/homework/02/clark-espaco-modulado-00.jpg)
-
-
-Image on repo:  
-![image description](./file-name.jpg)
-
-
-To start a new line, add two spaces at the end of a line, like this:  
-this is a new line.
-
-
-To start a new paragraph, leave an empty line between two lines of text.
-
-This is a new paragraph.
+```
+let spacing = 1.2 * maxDiameter;
+```
